@@ -2,7 +2,7 @@ export default function Component() {
   return (
     <section
       id="overview"
-      className="w-full bg-[#111111] text-white py-16 md:py-24"
+      className="w-full bg-[#111111] text-white py-16 md:py-24 z-10"
     >
       <div className="container mx-auto px-4 md:px-6">
         <h1 className="text-4xl md:text-6xl font-bold tracking-wider mb-16">

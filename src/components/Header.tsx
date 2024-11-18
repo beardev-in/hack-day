@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import logo from "../../public/0x.Day-white.png";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -18,9 +19,9 @@ export default function Header() {
 
   const navItems = [
     "Overview",
-    "Past Events",
-    "Virtual Bounties",
-    "How It Works",
+    "Guidelines",
+    "BUIDL Statements",
+    "Prizes",
     "Partner With Us",
     "2024 Cities",
   ];
@@ -36,11 +37,11 @@ export default function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
-              src="/placeholder.svg"
-              alt="Hack Global"
-              width={120}
+              src={logo}
+              alt="0x.Day"
+              width={1000}
               height={32}
-              className="h-8 w-auto"
+              className="h-24 w-auto"
             />
           </Link>
 
@@ -60,16 +61,16 @@ export default function Header() {
           {/* Action Buttons & Language */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
-              href="#grand-finals"
+              href="#login"
               className="inline-flex h-10 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
             >
-              Grand Finals
+              Login
             </Link>
             <Link
-              href="#be-a-sponsor"
+              href="#register"
               className="inline-flex h-10 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
             >
-              Be a Sponsor
+              Register
             </Link>
             <button
               className="text-white hover:text-white/80 p-2"
@@ -190,18 +191,18 @@ export default function Header() {
                 </nav>
                 <div className="mt-auto space-y-4">
                   <Link
-                    href="#grand-finals"
+                    href="#login"
                     className="inline-flex w-full h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Grand Finals
+                    Login
                   </Link>
                   <Link
-                    href="#be-a-sponsor"
+                    href="#registerr"
                     className="inline-flex w-full h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Be a Sponsor
+                    Register
                   </Link>
                 </div>
               </div>

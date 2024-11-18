@@ -4,14 +4,28 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 export default function Component() {
-  const globeRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Add any globe animation/interaction logic here if needed
-  }, []);
-
   return (
     <section className="relative mt-10 md:mt-44 min-h-[100dvh] overflow-hidden">
+      {/* Star field background */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(100)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full bg-white"
+            style={{
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              width: `${Math.random() * 2 + 1}px`,
+              height: `${Math.random() * 2 + 1}px`,
+              opacity: Math.random() * 0.5 + 0.3,
+              animation: `twinkle ${
+                Math.random() * 4 + 2
+              }s infinite ease-in-out`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container mx-auto px-4 h-full">
         <div className="grid lg:grid-cols-2 gap-8 h-full items-center pt-20 lg:pt-0">
           {/* Left Content */}
@@ -36,19 +50,8 @@ export default function Component() {
             </div>
           </div>
 
-          {/* Right Content - Globe */}
-          <div className="relative lg:absolute lg:right-0 lg:top-0 lg:w-3/5 lg:h-full">
-            <div
-              ref={globeRef}
-              className="w-full h-[400px] lg:h-full opacity-75"
-            >
-              <img
-                src="/placeholder.svg"
-                alt="Globe visualization"
-                className="w-full h-full object-contain"
-              />
-            </div>
-          </div>
+          {/* Right Content - Empty for background effect */}
+          <div className="relative lg:absolute lg:right-0 lg:top-0 lg:w-3/5 lg:h-full"></div>
         </div>
 
         {/* Cities Timeline */}
@@ -72,7 +75,7 @@ export default function Component() {
                   <div key={city} className="flex flex-col items-center">
                     <div className="w-8 h-8 mb-2">
                       <img
-                        src={`/placeholder.svg`}
+                        src={`/placeholder.svg?height=32&width=32`}
                         alt={`${city} icon`}
                         className="w-full h-full object-contain"
                       />
@@ -87,6 +90,18 @@ export default function Component() {
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes twinkle {
+          0%,
+          100% {
+            opacity: 0.3;
+          }
+          50% {
+            opacity: 0.8;
+          }
+        }
+      `}</style>
     </section>
   );
 }

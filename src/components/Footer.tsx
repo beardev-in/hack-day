@@ -20,7 +20,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-[#111111] py-12">
+    <footer className="w-full bg-[#111111] py-12 z-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start">
           {/* Initiative By */}

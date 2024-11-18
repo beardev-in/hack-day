@@ -10,13 +10,13 @@ export default function Component() {
     },
     {
       icon: DollarSign,
-      title: "Earn Points and Prizes",
+      title: "Form a team",
       description:
         "Participate in hackathons, tackle challenges, and earn points. Alongside points, cash prizes await you.",
     },
     {
       icon: Trophy,
-      title: "Climb the Leaderboard",
+      title: "Start Hack",
       description:
         "Your points contribute to your position on The Global Hackathon Series Leaderboard, which we track throughout the year.",
     },
@@ -29,11 +29,11 @@ export default function Component() {
   ];
 
   return (
-    <section id="how-it-works" className="w-full bg-[#111111] py-16 md:py-24">
+    <section id="prizes" className="w-full bg-black py-16 md:py-24  z-10">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider mb-8">
-            HOW IT WORKS
+        <div className="mx-auto">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider mb-8 uppercase">
+            Prizes
           </h2>
           <p className="text-xl text-gray-200 tracking-wide mb-16 max-w-4xl">
             Embark on an extraordinary year-long adventure where innovation

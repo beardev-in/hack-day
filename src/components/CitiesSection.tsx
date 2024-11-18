@@ -33,7 +33,7 @@ export default function Component() {
   ];
 
   return (
-    <section id="2024-cities" className="w-full bg-[#111111] py-16 md:py-24">
+    <section id="2024-cities" className="w-full bg-black py-16 md:py-24  z-10">
       <div className="container mx-auto px-4 md:px-6">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider mb-16">
           2024 CITIES

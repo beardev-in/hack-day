@@ -4,15 +4,15 @@ import { ArrowRight } from "lucide-react";
 export default function Component() {
   return (
     <section
-      id="virtual-bounties"
-      className="w-full bg-[#111111] py-16 md:py-24"
+      id="buidl-statements"
+      className="w-full bg-[#111111] py-16 md:py-24  z-10"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid lg:grid-cols-2 mx-auto gap-12 lg:gap-24 items-start">
           {/* Left Column */}
           <div className="space-y-8">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider">
-              VIRTUAL BOUNTIES
+              BUIDL STATEMENTS
             </h2>
             <div className="space-y-6">
               <p className="text-lg md:text-xl text-gray-200 leading-relaxed tracking-wide">

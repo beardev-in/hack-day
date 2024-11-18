@@ -17,15 +17,13 @@ export default function Component() {
 
   return (
     <section
-      id="past-events"
-      className="w-full bg-[#111111] py-16 md:py-24 relative overflow-hidden"
+      id="guidelines"
+      className="w-full bg-black py-16 md:py-24 relative overflow-hidden  z-10"
     >
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-start mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider leading-tight">
-            PAST GLOBAL
-            <br />
-            HACKATHON SERIES
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-wider leading-tight uppercase">
+            Guidelines
           </h2>
           <Link
             href="/more"
