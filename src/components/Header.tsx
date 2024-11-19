@@ -47,15 +47,23 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item}
-                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                className="text-sm font-medium text-white hover:text-white/80 transition-colors"
-              >
-                {item}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const sectionId = item.toLowerCase().replace(/\s+/g, "-");
+              return (
+                <button
+                  key={item}
+                  onClick={() => {
+                    const targetSection = document.getElementById(sectionId);
+                    if (sectionId) {
+                      targetSection.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }}
+                  className="text-sm font-medium text-white hover:text-white/80 transition-colors"
+                >
+                  {item}
+                </button>
+              );
+            })}
           </nav>
 
           {/* Action Buttons & Language */}
