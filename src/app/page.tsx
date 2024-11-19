@@ -1,7 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import OverviewSection from "@/components/OverviewSection";
-import PastEventsSection from "@/components/PastEventsSection";
-import VirtualBountiesSection from "@/components/VirtualBountiesSection";
+import GuidelinesSection from "@/components/GuidelinesSection";
+import BuidlStatementsSection from "@/components/BuidlStatementsSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
 import PartnerWithUsSection from "@/components/PartnerWithUsSection";
 import CitiesSection from "@/components/CitiesSection";
@@ -11,11 +11,11 @@ export default function Home() {
     <main className="flex min-h-screen flex-col items-center justify-between">
       <HeroSection />
       <OverviewSection />
-      <PastEventsSection />
-      <VirtualBountiesSection />
+      <GuidelinesSection />
+      <BuidlStatementsSection />
       <HowItWorksSection />
-      <PartnerWithUsSection />
-      <CitiesSection />
+      {/* <PartnerWithUsSection /> */}
+      {/* <CitiesSection /> */}
     </main>
   );
 }

@@ -21,9 +21,9 @@ export default function Header() {
     "Overview",
     "Guidelines",
     "BUIDL Statements",
-    "Prizes",
-    "Partner With Us",
-    "2024 Cities",
+    "How it Works",
+    // "Partner With Us",
+    // "2024 Cities",
   ];
 
   return (
@@ -80,7 +80,7 @@ export default function Header() {
             >
               Register
             </Link>
-            <button
+            {/* <button
               className="text-white hover:text-white/80 p-2"
               aria-label="Change language"
             >
@@ -99,12 +99,12 @@ export default function Header() {
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
               </svg>
-            </button>
+            </button> */}
           </div>
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center space-x-4">
-            <button
+            {/* <button
               className="text-white hover:text-white/80 p-2"
               aria-label="Change language"
             >
@@ -123,7 +123,7 @@ export default function Header() {
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
               </svg>
-            </button>
+            </button> */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-white hover:text-white/80 p-2"
@@ -154,7 +154,7 @@ export default function Header() {
                 <div className="flex justify-between items-center mb-8">
                   <Link href="/" className="flex items-center">
                     <Image
-                      src="/placeholder.svg"
+                      src={logo}
                       alt="Hack Global"
                       width={120}
                       height={32}

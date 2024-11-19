@@ -43,7 +43,7 @@ export default function Component() {
         className="absolute inset-0"
         style={{
           background: `
-          radial-gradient(circle at 50% 0%, rgba(0,255,0, 0.08), transparent 60%),
+          radial-gradient(circle at 50% 0%, rgba(0,255,0, 0.1), transparent 60%),
           linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.8) 100%) /* Fading effect */
         `,
         }}
@@ -66,7 +66,7 @@ export default function Component() {
       ))}
 
       {/* Content Container */}
-      <div className="container w-full flex justify-center mt-28 md:mt-48 mx-auto px-4 h-full">
+      <div className="container w-full flex justify-center items-center min-h-screen mx-auto px-4 h-full">
         <div className="w-full h-full flex items-center justify-center pt-20 lg:pt-0">
           <div className="relative z-10 space-y-6 lg:space-y-8 text-center">
             <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white text-center leading-tight tracking-wide">
@@ -83,10 +83,11 @@ export default function Component() {
             </p>
             <div>
               <Link
-                href="#join-waitlist"
-                className="inline-block bg-white/10 text-white px-6 py-3 rounded-full text-lg font-medium hover:bg-white/20 transition-all duration-300"
+                href="#"
+                className="relative inline-block bg-transparent text-white px-5 py-3 rounded-full text-lg font-medium border border-1 border-white  transition-all duration-300 hover:scale-105 active:scale-95"
               >
-                Join the waitlist
+                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 via-teal-500 to-blue-600 opacity-30 blur-lg"></span>
+                Start Hacking
               </Link>
             </div>
           </div>
