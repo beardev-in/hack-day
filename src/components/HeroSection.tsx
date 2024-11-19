@@ -1,26 +1,35 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
 
 export default function Component() {
+  const [stars, setStars] = useState([]);
+
+  useEffect(() => {
+    const generateStars = () =>
+      [...Array(100)].map(() => ({
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        width: `${Math.random() * 2 + 1}px`,
+        height: `${Math.random() * 2 + 1}px`,
+        opacity: Math.random() * 0.5 + 0.3,
+        animationDuration: `${Math.random() * 4 + 2}s`,
+      }));
+    setStars(generateStars());
+  }, []);
+
   return (
     <section className="relative mt-10 md:mt-44 min-h-[100dvh] overflow-hidden">
       {/* Star field background */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(100)].map((_, i) => (
+        {stars.map((star, i) => (
           <div
             key={i}
             className="absolute rounded-full bg-white"
             style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              width: `${Math.random() * 2 + 1}px`,
-              height: `${Math.random() * 2 + 1}px`,
-              opacity: Math.random() * 0.5 + 0.3,
-              animation: `twinkle ${
-                Math.random() * 4 + 2
-              }s infinite ease-in-out`,
+              ...star,
+              animation: `twinkle ${star.animationDuration} infinite ease-in-out`,
             }}
           />
         ))}
