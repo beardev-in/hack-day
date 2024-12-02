@@ -18,19 +18,15 @@ export default function Header() {
   }, []);
 
   const navItems = [
-    "Overview",
+    "Hack-$-Day",
     "Guidelines",
     "BUIDL Statements",
-    "How it Works",
-    // "Partner With Us",
-    // "2024 Cities",
+    "How it Works"
   ];
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-black/80 backdrop-blur-sm" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black overflow-hidden`}
     >
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
@@ -54,7 +50,7 @@ export default function Header() {
                   key={item}
                   onClick={() => {
                     const targetSection = document.getElementById(sectionId);
-                    if (sectionId) {
+                    if (targetSection) {
                       targetSection.scrollIntoView({ behavior: "smooth" });
                     }
                   }}
@@ -69,17 +65,17 @@ export default function Header() {
           {/* Action Buttons & Language */}
           <div className="hidden lg:flex items-center space-x-4">
             <Link
-              href="#login"
+              href="#apply"
               className="inline-flex h-10 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
             >
-              Login
+              Apply
             </Link>
-            <Link
+            {/* <Link
               href="#register"
               className="inline-flex h-10 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
             >
               Register
-            </Link>
+            </Link> */}
             {/* <button
               className="text-white hover:text-white/80 p-2"
               aria-label="Change language"
@@ -198,19 +194,13 @@ export default function Header() {
                   </ul>
                 </nav>
                 <div className="mt-auto space-y-4">
-                  <Link
-                    href="#login"
-                    className="inline-flex w-full h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Login
-                  </Link>
+                  
                   <Link
                     href="#registerr"
                     className="inline-flex w-full h-12 items-center justify-center rounded-full border border-white px-6 text-sm font-medium text-white transition-colors hover:bg-white hover:text-black"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Register
+                    Apply
                   </Link>
                 </div>
               </div>
