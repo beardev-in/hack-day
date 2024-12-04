@@ -4,10 +4,64 @@
 @tailwind components;
 @tailwind utilities;
 
+.monasans{
+  font-family: 'MonaSansBoldWide', sans-serif;
+}
+
+.aquireBold{
+  font-family: 'AquireBold', sans-serif;
+}
+
+.gap_section {
+  margin: 0 132px 0 132px;
+  padding: 2rem;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
+}
+
+#root {
+  width: 100%;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,4 +98,73 @@ body {
   transform: translate(-50%, -50%); /* Center the circle on the cursor */
   transition: transform 0.1s ease, opacity 0.2s ease;
   z-index: 9999;
+}
+
+
+@keyframes star-rise {
+  0% {
+    transform: translateY(100vh);
+  }
+  100% {
+    transform: translateY(-10vh);
+  }
+}
+.animate-star {
+  animation: star-rise linear infinite;
+}
+
+@font-face {
+  font-family: "MonaSansBoldWide";
+  src: url("/Mona-Sans-BoldWide.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+font-family: "AquireBold";
+  src: url("/AquireBold-8Ma60.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #96969648; /* Thumb (draggable part) color */
+  border-radius: 8px; /* Rounded corners */
+  border: 2px solid #68696a; /* Adds a gap between the thumb and the track */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #4a4949; /* Track background color */
+  border-radius: 8px; /* Rounded corners */
+}
+
+/* Initially hide the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: #1f1f1fb2; /* Thumb (draggable part) color */
+  border-radius: 8px; /* Rounded corners */
+  border: 2px solid #4d4e4e; /* Adds a gap between the thumb and the track */
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: #4240409c; /* Track background color */
+  border-radius: 8px; /* Rounded corners */
+}
+
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.hide-scrollbar {
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }

@@ -2,12 +2,30 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import globe from "../../public/globe.png";
+import Navbar from "./Navbar";
+import doller from "../../public/doller.png";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useToast } from "@/components/ui/use-toast";
+import Image from "next/image";
+
+// Type for the stars
+interface Star {
+  left: string;
+  animationDuration: string;
+  size: number;
+  opacity: number;
+}
 
 export default function Component() {
-  const [stars, setStars] = useState([]);
+  // const dispatch = useDispatch();
+  // const {toast} = useToast();
+  // const navigate = useNavigate();
+  const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
-    const generateStars = () =>
+    const generateStars = (): Star[] =>
       [...Array(50)].map(() => ({
         left: `${Math.random() * 100}%`,
         animationDuration: `${Math.random() * 100 + 10}s`,
@@ -24,8 +42,18 @@ export default function Component() {
     return () => clearInterval(interval);
   }, []);
 
+  // const handleApply = () => {
+  //   dispatch(updateApplication({ ["status"]: true }));
+  //   toast({
+  //     variant: "default",
+  //     title: "Notification",
+  //     description: `Kindly register your Hacker Profile on 0xProfile.com before starting the application process. Verify by entering your registered phone number!`,
+  //     duration: 8000,
+  //   });
+  // };
+
   return (
-    <section className="relative w-full min-h-[100dvh] overflow-hidden bg-[#0A0F17]">
+    <section className="relative w-full min-h-screen overflow-hidden bg-[#0A0F17]">
       {/* Grid Background */}
       <div
         className="absolute inset-0"
@@ -43,8 +71,8 @@ export default function Component() {
         className="absolute inset-0"
         style={{
           background: `
-          radial-gradient(circle at 50% 0%, rgba(0,255,0, 0.1), transparent 60%),
-          linear-gradient(to bottom, rgba(0,0,0,0) 30%, rgba(0,0,0,0.8) 100%) /* Fading effect */
+          radial-gradient(circle at 50% 0%, rgba(0,255,0, 0.1), transparent 40%),
+          linear-gradient(to bottom, rgba(0,0,0,0) 100%, rgba(0,0,0,0.8) 100%) /* Fading effect */
         `,
         }}
       />
@@ -65,77 +93,48 @@ export default function Component() {
         />
       ))}
 
+      {/* Rotating Globe */}
+      <div className="absolute top-20 -right-64 transform -translate-y-1/2 w-[650px] h-[650px] animate-rotate-circular">
+        <Image
+          className="w-full h-full object-contain"
+          src={globe}
+          alt="Globe"
+        />
+      </div>
+
       {/* Content Container */}
-      <div className="container w-full flex justify-center items-center min-h-screen mx-auto px-4 h-full">
-        <div className="w-full h-full flex items-center justify-center pt-20 lg:pt-0">
-          <div className="relative z-10 space-y-6 lg:space-y-8 text-center">
-            <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-white text-center leading-tight tracking-wide">
-              BUIDL&apos;s Decentralised Hackathons and
-              <br />
-              Develops the SKILL PROTOCOL
-            </h1>
-            <p className="text-lg sm:text-xl lg:text-2xl text-center text-gray-300 tracking-wide">
-              We leverage blockchain technology to revolutionize deep tech
-              education,
-              <br />
-              create verifiable social proof, and empower global tech
-              professionals.
-            </p>
-            <div>
-              <Link
-                href="#"
-                className="relative inline-block bg-transparent text-white px-5 py-3 rounded-full text-lg font-medium border border-1 border-white  transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-green-400 via-teal-500 to-blue-600 opacity-30 blur-lg"></span>
-                Start Hacking
-              </Link>
+      <div>
+        <Navbar />
+        <div className="w-full flex min-h-[calc(100vh-120px)] px-4 h-full">
+          <div className="w-full h-full flex flex-col pt-20 pl-28 lg:pt-28">
+            <div className="relative z-10 space-y-6 lg:space-y-4 flex flex-col justify-center h-[199px] w-[677.32px]">
+              <h1 className="monasans text-3xl sm:text-[50px] lg:text-[50px] font-bold text-white leading-tight tracking-wide flex items-center">
+                Hack{" "}
+                <Image className="pl-4 h-[50px] w-[50px]" src={doller} alt="" />{" "}
+                DAY Series
+              </h1>
+              <div>
+                <p className="text-lg sm:text-[14px] lg:text-[14px] text-[#D2D2D2]">
+                  Join a transformative hackathon journey where creativity and
+                  technology merge to tackle meaningful challenges. Problem
+                  Statement: Innovate solutions for pressing issues in
+                  sustainability, fintech, and healthcare. Target Domains: AI,
+                  Blockchain, IoT, and Green Technology.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Learn More Link */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <button
-            onClick={() => {
-              const targetSection = document.getElementById("overview");
-              if (targetSection) {
-                targetSection.scrollIntoView({ behavior: "smooth" });
-              }
-            }}
-            className="text-white/60 hover:text-white transition-colors duration-300"
-          >
-            Learn more
-            <svg
-              className="inline-block ml-2 w-4 h-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
+        <div className="absolute bottom-20 w-full flex flex-col items-center gap-5 justify-center">
+          <div className="aquireBold text-[20px]">
+            <h1>LEARN • HACK • BUIDL</h1>
+          </div>
+          <button className="px-3 py-3 rounded-full border text-thin text-sm">
+            The Application for Hack $DAY Pondy is live now
           </button>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes star-rise {
-          0% {
-            transform: translateY(100vh);
-          }
-          100% {
-            transform: translateY(-10vh);
-          }
-        }
-        .animate-star {
-          animation: star-rise linear infinite;
-        }
-      `}</style>
     </section>
   );
 }

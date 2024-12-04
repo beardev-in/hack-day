@@ -8,15 +8,22 @@ export default {
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: "#FF4D00",
-        secondary: "#0A0A0A",
-        tertiary: "#1E1E1E",
+      backgroundImage: {
+        "custom-gradient":
+          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%)",
       },
-      fontFamily: {
-        sans: ["Inter", "sans-serif"],
+      cityBorder: {
+        "custom-border":
+          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%)",
+      },
+      animation: {
+        "rotate-circular": "rotate-circular 20s linear infinite", // Add the circular rotation animation
+      },
+      keyframes: {
+        "rotate-circular": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
     },
   },

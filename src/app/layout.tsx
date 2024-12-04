@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import CustomCursor from "@/components/CustomCursor";
@@ -21,7 +20,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <CustomCursor />
-        <Header />
         {children}
         <Footer />
         <BackToTop />
