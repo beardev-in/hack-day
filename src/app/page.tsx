@@ -13,8 +13,10 @@ export default function Home() {
     <main className="flex w-full min-h-screen flex-col items-center justify-between">
       <HeroSection />
       {/* <OverviewSection /> */}
-      <Hack$Day/>
-      <Cities/>
+      <div className="w-full">
+        <Hack$Day/>
+        <Cities/>
+      </div>
       {/* <GuidelinesSection />
       <BuidlStatementsSection />
       <HowItWorksSection /> */}

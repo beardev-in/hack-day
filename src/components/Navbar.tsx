@@ -1,11 +1,17 @@
+'use-client'
+
 import Image from "next/image";
-import logo from "../../public/0xDay_Logo.svg";
+import logo from "../../public/assets/0xDay_Logo.svg";
+import Link from "next/link";
 
 const Navbar = () => {
   return (
     <div className="w-full flex items-center justify-center mt-2">
-      <div className="w-[85%] bg-transparent">
-        <Image src={logo} className="w-[120px]" alt="0xDay-Logo" />
+      <div className=" bg-transparent"
+      style={{ width: 'calc(100vw - 220px)' }}>
+        <Link href="/">
+          <Image src={logo} className="w-[120px]" alt="0xDay-Logo" /> 
+        </Link>
       </div>
     </div>
   );

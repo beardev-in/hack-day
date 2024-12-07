@@ -13,7 +13,7 @@
 }
 
 .gap_section {
-  margin: 0 132px 0 132px;
+  margin: 0 80px 0 80px;
   padding: 2rem;
 }
 
@@ -79,6 +79,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    background-color: #131212;
 }
 
 @layer utilities {

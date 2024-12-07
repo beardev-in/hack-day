@@ -10,14 +10,22 @@ export default {
     extend: {
       backgroundImage: {
         "custom-gradient":
-          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.1) 100%)",
+          
+          'corner-glow': `
+          radial-gradient(circle at top left, rgba(6, 194, 112, 1), transparent 394px),
+          radial-gradient(circle at top right, rgba(0, 255, 0, 0.5), transparent 94px),
+          radial-gradient(circle at bottom right, rgba(6, 194, 112, 1), transparent 194px)
+        `,
       },
       cityBorder: {
         "custom-border":
-          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%)",
+          "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255,) 100%)",
       },
       animation: {
         "rotate-circular": "rotate-circular 20s linear infinite", // Add the circular rotation animation
+        "border-glow": "glow-border 2s infinite",
+        "inner-glow": "inner-glow 3s infinite",
       },
       keyframes: {
         "rotate-circular": {

@@ -1,7 +1,7 @@
-'use client'
+"use client";
 
-import React, { useState, useRef, useEffect } from 'react';
-import Timelines from './Timelines';
+import React, { useState, useRef, useEffect } from "react";
+import Timelines from "./Timelines";
 
 const DraggableTimeline: React.FC = () => {
   const [dragging, setDragging] = useState(false);
@@ -9,15 +9,18 @@ const DraggableTimeline: React.FC = () => {
   const timelineRef = useRef<HTMLDivElement>(null);
   const draggerRef = useRef<HTMLDivElement>(null);
 
+  const itemHeight = 100; // Height of a timeline item (including gaps)
+
   // Synchronize the scroller with the timeline scroll
   const syncScrollerWithTimeline = () => {
     if (timelineRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = timelineRef.current;
       const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
-      const lineHeight = timelineRef.current.offsetHeight;
+      const lineHeight = clientHeight; // Visible height of the timeline container
       const draggerHeight = draggerRef.current?.offsetHeight || 0;
 
-      setPosition(scrollPercentage * (lineHeight - draggerHeight));
+      const newPosition = scrollPercentage * (lineHeight - draggerHeight);
+      setPosition(Math.round(newPosition / itemHeight) * itemHeight); // Snap to nearest item
     }
   };
 
@@ -25,61 +28,66 @@ const DraggableTimeline: React.FC = () => {
   const syncTimelineWithScroller = (newPosition: number) => {
     if (timelineRef.current) {
       const { scrollHeight, clientHeight } = timelineRef.current;
-      const scrollPercentage = newPosition / (timelineRef.current.offsetHeight - (draggerRef.current?.offsetHeight || 0));
+      const scrollPercentage =
+        newPosition / (clientHeight - (draggerRef.current?.offsetHeight || 0));
       timelineRef.current.scrollTo({
         top: scrollPercentage * (scrollHeight - clientHeight),
-        behavior: 'auto',
+        behavior: "auto",
       });
     }
   };
 
   // Handle drag start
-  const handleDragStart = () => {
-    setDragging(true);
-  };
+  const handleDragStart = () => setDragging(true);
 
   // Handle drag end
   const handleDragEnd = () => {
     setDragging(false);
+    // Snap to nearest timeline item
+    const snappedPosition = Math.round(position / itemHeight) * itemHeight;
+    setPosition(snappedPosition);
+    syncTimelineWithScroller(snappedPosition);
   };
 
   // Handle drag move
   const handleDragMove = (e: MouseEvent) => {
     if (dragging && timelineRef.current) {
-      const lineHeight = timelineRef.current.offsetHeight;
+      const timeline = timelineRef.current;
+      const lineHeight = timeline.offsetHeight;
       const draggerHeight = draggerRef.current?.offsetHeight || 0;
       const newPos = Math.min(
-        Math.max(0, e.clientY - timelineRef.current.getBoundingClientRect().top),
+        Math.max(0, e.clientY - timeline.getBoundingClientRect().top),
         lineHeight - draggerHeight
       );
+
       setPosition(newPos);
       syncTimelineWithScroller(newPos);
     }
   };
 
-  // Event listeners for drag and scroll
+  // Attach drag event listeners
   useEffect(() => {
     if (dragging) {
-      document.addEventListener('mousemove', handleDragMove);
-      document.addEventListener('mouseup', handleDragEnd);
+      document.addEventListener("mousemove", handleDragMove);
+      document.addEventListener("mouseup", handleDragEnd);
     } else {
-      document.removeEventListener('mousemove', handleDragMove);
-      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener("mousemove", handleDragMove);
+      document.removeEventListener("mouseup", handleDragEnd);
     }
 
     return () => {
-      document.removeEventListener('mousemove', handleDragMove);
-      document.removeEventListener('mouseup', handleDragEnd);
+      document.removeEventListener("mousemove", handleDragMove);
+      document.removeEventListener("mouseup", handleDragEnd);
     };
   }, [dragging]);
 
-  // Attach scroll event listener to synchronize scroller with timeline scroll
+  // Attach scroll synchronization
   useEffect(() => {
     const currentTimeline = timelineRef.current;
-    currentTimeline?.addEventListener('scroll', syncScrollerWithTimeline);
+    currentTimeline?.addEventListener("scroll", syncScrollerWithTimeline);
 
     return () => {
-      currentTimeline?.removeEventListener('scroll', syncScrollerWithTimeline);
+      currentTimeline?.removeEventListener("scroll", syncScrollerWithTimeline);
     };
   }, []);
 
@@ -88,9 +96,8 @@ const DraggableTimeline: React.FC = () => {
       <div className="flex gap-4">
         {/* Vertical Line */}
         <div
-          ref={timelineRef}
           className="relative w-[2px] bg-custom-gradient min-h-screen"
-          style={{ position: 'relative', height: '100%' }}
+          style={{ height: "100%" }}
         >
           {/* Draggable Scroller */}
           <div
@@ -98,8 +105,8 @@ const DraggableTimeline: React.FC = () => {
             className="w-[16px] h-[16px] bg-[#969696] border border-[#FFFFFF] rounded-full absolute"
             style={{
               top: position, // Position of the scroller
-              left: '-7px', // Slightly offset to align with the line
-              cursor: 'pointer',
+              left: "-7px",
+              cursor: "pointer",
             }}
             onMouseDown={handleDragStart}
           />
@@ -108,8 +115,8 @@ const DraggableTimeline: React.FC = () => {
         {/* Scrollable Timeline Section */}
         <div
           ref={timelineRef}
-          className="w-[379px] flex flex-col gap-5 overflow-y-auto overflow-x-hidden"
-          style={{ height: '100vh' }} // Restrict height to viewport
+          className="hide-scrollbar w-[379px] flex flex-col gap-5 overflow-y-auto overflow-x-hidden"
+          style={{ height: "100vh" }} // Restrict height to viewport
         >
           {/* Timeline Items */}
           <Timelines position={position} />

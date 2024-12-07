@@ -1,14 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import globe from "../../public/globe.png";
+import globe from "../../public/assets/globe.png";
 import Navbar from "./Navbar";
-import doller from "../../public/doller.png";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useToast } from "@/components/ui/use-toast";
+import doller from "../../public/assets/doller.png";
 import Image from "next/image";
+import Link from "next/link";
 
 // Type for the stars
 interface Star {
@@ -41,16 +38,6 @@ export default function Component() {
 
     return () => clearInterval(interval);
   }, []);
-
-  // const handleApply = () => {
-  //   dispatch(updateApplication({ ["status"]: true }));
-  //   toast({
-  //     variant: "default",
-  //     title: "Notification",
-  //     description: `Kindly register your Hacker Profile on 0xProfile.com before starting the application process. Verify by entering your registered phone number!`,
-  //     duration: 8000,
-  //   });
-  // };
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-[#0A0F17]">
@@ -106,7 +93,7 @@ export default function Component() {
       <div>
         <Navbar />
         <div className="w-full flex min-h-[calc(100vh-120px)] px-4 h-full">
-          <div className="w-full h-full flex flex-col pt-20 pl-28 lg:pt-28">
+          <div className="w-full h-full flex flex-col pt-20 pl-24 lg:pt-28">
             <div className="relative z-10 space-y-6 lg:space-y-4 flex flex-col justify-center h-[199px] w-[677.32px]">
               <h1 className="monasans text-3xl sm:text-[50px] lg:text-[50px] font-bold text-white leading-tight tracking-wide flex items-center">
                 Hack{" "}
@@ -126,13 +113,20 @@ export default function Component() {
           </div>
         </div>
 
-        <div className="absolute bottom-20 w-full flex flex-col items-center gap-5 justify-center">
+        <div className="absolute bottom-20 w-full flex flex-col items-center gap-3 justify-center">
           <div className="aquireBold text-[20px]">
             <h1>LEARN • HACK • BUIDL</h1>
           </div>
-          <button className="px-3 py-3 rounded-full border text-thin text-sm">
-            The Application for Hack $DAY Pondy is live now
-          </button>
+
+          <div className="flex justify-center border rounded-full pt-[12px] pb-[12px] text-[16px] relative overflow-hidden group">
+            <Link
+              href="/hackathon/pondy"
+              className="relative z-10 px-3 text-white group-hover:text-black transition duration-300"
+            >
+              The Application for Hack $DAY Pondy is live now
+            </Link>
+            <div className="absolute w-full h-[500px] bg-white rounded-full scale-0 group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+          </div>
         </div>
       </div>
     </section>

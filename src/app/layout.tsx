@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <CustomCursor />
         {children}
-        <Footer />
+        {/* <Footer /> */}
         <BackToTop />
       </body>
     </html>
