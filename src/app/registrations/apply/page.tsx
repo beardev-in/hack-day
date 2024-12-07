@@ -1,14 +1,13 @@
 "use client";
-
 import Navbar from "@/components/Navbar";
 import React, { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";  // Import necessary hooks
-import { setTeamName, setTeamCount, setParticipationType } from "@/app/redux/features/ApplicationSlice";  // Import actions
-import { RootState } from "@/app/redux/store";  // Import the root state
+import { useDispatch, useSelector } from "react-redux"; 
+import { setTeamName, setTeamCount, setParticipationType } from "@/app/redux/features/ApplicationSlice"; 
+import { RootState } from "@/app/redux/store";
 
 // Define schema for form validation
 const FormSchema = z.object({
