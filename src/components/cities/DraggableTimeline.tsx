@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState, useRef, useEffect } from "react";
 import Timelines from "./Timelines";
@@ -10,16 +10,16 @@ const DraggableTimeline: React.FC = () => {
   const draggerRef = useRef<HTMLDivElement>(null);
 
   const itemHeight = 100; // Height of a timeline item (including gaps)
+  const maxHeight = 600; // The maximum height of the timeline container
 
   // Synchronize the scroller with the timeline scroll
   const syncScrollerWithTimeline = () => {
     if (timelineRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = timelineRef.current;
       const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
-      const lineHeight = clientHeight; // Visible height of the timeline container
       const draggerHeight = draggerRef.current?.offsetHeight || 0;
 
-      const newPosition = scrollPercentage * (lineHeight - draggerHeight);
+      const newPosition = scrollPercentage * (maxHeight - draggerHeight);
       setPosition(Math.round(newPosition / itemHeight) * itemHeight); // Snap to nearest item
     }
   };
@@ -28,8 +28,7 @@ const DraggableTimeline: React.FC = () => {
   const syncTimelineWithScroller = (newPosition: number) => {
     if (timelineRef.current) {
       const { scrollHeight, clientHeight } = timelineRef.current;
-      const scrollPercentage =
-        newPosition / (clientHeight - (draggerRef.current?.offsetHeight || 0));
+      const scrollPercentage = newPosition / (maxHeight - (draggerRef.current?.offsetHeight || 0));
       timelineRef.current.scrollTo({
         top: scrollPercentage * (scrollHeight - clientHeight),
         behavior: "auto",
@@ -92,11 +91,11 @@ const DraggableTimeline: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-[379px] flex justify-between">
-      <div className="flex gap-4">
+    <div className="relative w-full sm:w-[379px] flex justify-between max-h-[600px]">
+      <div className="flex gap-4 w-full max-h-[600px]">
         {/* Vertical Line */}
         <div
-          className="relative w-[2px] bg-custom-gradient min-h-screen"
+          className="relative w-[2px] bg-custom-gradient h-[600px]"
           style={{ height: "100%" }}
         >
           {/* Draggable Scroller */}
@@ -115,8 +114,7 @@ const DraggableTimeline: React.FC = () => {
         {/* Scrollable Timeline Section */}
         <div
           ref={timelineRef}
-          className="hide-scrollbar w-[379px] flex flex-col gap-5 overflow-y-auto overflow-x-hidden"
-          style={{ height: "100vh" }} // Restrict height to viewport
+          className="hide-scrollbar w-full sm:w-[379px] flex flex-col gap-5 overflow-y-auto overflow-x-hidden max-h-[600px]"
         >
           {/* Timeline Items */}
           <Timelines position={position} />

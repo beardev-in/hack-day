@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 import hackerImg from "../../../../public/assets/hacker.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 const Pondy = () => {
   const months = [
@@ -132,14 +133,14 @@ const Pondy = () => {
 
             <div className="w-full h-[1px] bg-custom-gradient"></div>
             <div className="w-full flex justify-center border rounded-full pt-[12px] pb-[12px] font-bold text-[18px] relative overflow-hidden group">
-              <button className="relative z-10 text-white group-hover:text-black transition duration-300">
-                Apply
-              </button>
+              <Link href='/registrations/register' className="relative z-10 text-white group-hover:text-black transition duration-300">
+                Register Now
+              </Link>
               <div className="absolute w-full h-[500px] bg-white rounded-full scale-0 group-hover:scale-150 transition-transform duration-500 ease-out"></div>
             </div>
             <p className="text-[14px]">
               Already a registered user?{" "}
-              <span className="text-[#06C270]">Apply here</span>
+              <Link href="/registrations/apply" className="text-[#06C270]">Apply here</Link>
             </p>
           </div>
         </div>

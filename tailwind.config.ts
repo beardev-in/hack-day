@@ -13,9 +13,9 @@ export default {
           "radial-gradient(100% 100% at 0% 0%, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.1) 100%)",
           
           'corner-glow': `
-          radial-gradient(circle at top left, rgba(6, 194, 112, 1), transparent 394px),
-          radial-gradient(circle at top right, rgba(0, 255, 0, 0.5), transparent 94px),
-          radial-gradient(circle at bottom right, rgba(6, 194, 112, 1), transparent 194px)
+          radial-gradient(circle at top left, rgba(6, 194, 112, 0.4), transparent 394px),
+          radial-gradient(circle at top right, rgba(0, 255, 0, 0.1), transparent 154px),
+          radial-gradient(circle at bottom right, rgba(6, 194, 112, 0.4), transparent 294px)
         `,
       },
       cityBorder: {

@@ -15,10 +15,7 @@ interface Star {
   opacity: number;
 }
 
-export default function Component() {
-  // const dispatch = useDispatch();
-  // const {toast} = useToast();
-  // const navigate = useNavigate();
+export default function HeroSection() {
   const [stars, setStars] = useState<Star[]>([]);
 
   useEffect(() => {
@@ -81,7 +78,7 @@ export default function Component() {
       ))}
 
       {/* Rotating Globe */}
-      <div className="absolute top-20 -right-64 transform -translate-y-1/2 w-[650px] h-[650px] animate-rotate-circular">
+      <div className="absolute top-20 -right-64 transform -translate-y-1/2 w-[450px] h-[450px] animate-rotate-circular lg:w-[600px] lg:h-[600px] md:w-[500px] md:h-[500px] sm:w-[350px] sm:h-[350px]">
         <Image
           className="w-full h-full object-contain"
           src={globe}
@@ -93,11 +90,11 @@ export default function Component() {
       <div>
         <Navbar />
         <div className="w-full flex min-h-[calc(100vh-120px)] px-4 h-full">
-          <div className="w-full h-full flex flex-col pt-20 pl-24 lg:pt-28">
-            <div className="relative z-10 space-y-6 lg:space-y-4 flex flex-col justify-center h-[199px] w-[677.32px]">
-              <h1 className="monasans text-3xl sm:text-[50px] lg:text-[50px] font-bold text-white leading-tight tracking-wide flex items-center">
+          <div className="w-full h-full flex flex-col pt-20 pl-4 sm:pl-16 lg:pl-24 lg:pt-28">
+            <div className="relative z-10 space-y-6 lg:space-y-4 flex flex-col justify-center h-[199px] sm:h-[250px] lg:h-[300px] w-[90%] sm:w-[677px]">
+              <h1 className="monasans text-xl sm:text-[40px] lg:text-[50px] font-bold text-white leading-tight tracking-wide flex items-center">
                 Hack{" "}
-                <Image className="pl-4 h-[50px] w-[50px]" src={doller} alt="" />{" "}
+                <Image className="pl-4 pr-1 h-[25px] w-[40px] md:h-[50px] md:w-[50px]" src={doller} alt="" />{" "}
                 DAY Series
               </h1>
               <div>
@@ -114,16 +111,24 @@ export default function Component() {
         </div>
 
         <div className="absolute bottom-20 w-full flex flex-col items-center gap-3 justify-center">
-          <div className="aquireBold text-[20px]">
+          <div className="aquireBold text-[20px] sm:text-[24px] lg:text-[28px]">
             <h1>LEARN • HACK • BUIDL</h1>
           </div>
 
-          <div className="flex justify-center border rounded-full pt-[12px] pb-[12px] text-[16px] relative overflow-hidden group">
+          <div className="flex justify-center border rounded-full pt-[12px] pb-[12px] text-[16px] sm:text-[18px] relative overflow-hidden group">
             <Link
               href="/hackathon/pondy"
               className="relative z-10 px-3 text-white group-hover:text-black transition duration-300"
             >
-              The Application for Hack $DAY Pondy is live now
+              {/* Show different text based on screen size */}
+              <span className="block sm:hidden">
+                Apply for Hack $DAY Pondy
+              </span>{" "}
+              {/* Mobile Text */}
+              <span className="hidden sm:block">
+                The Application for Hack $DAY Pondy is live now
+              </span>{" "}
+              {/* Desktop Text */}
             </Link>
             <div className="absolute w-full h-[500px] bg-white rounded-full scale-0 group-hover:scale-150 transition-transform duration-500 ease-out"></div>
           </div>

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="w-full flex items-center justify-center mt-2">
+    <div className="w-full flex items-center justify-center pt-2">
       <div className=" bg-transparent"
       style={{ width: 'calc(100vw - 220px)' }}>
         <Link href="/">

@@ -17,6 +17,12 @@
   padding: 2rem;
 }
 
+@media (max-width: 768px) {
+  .gap_section {
+    margin: 0 10px 0 10px; /* Adjust the margin for smaller screens */
+  }
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
