@@ -1,7 +1,10 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector } from "react-redux"; // Import useSelector
+import { RootState } from "@/app/redux/store";
 import Timelines from "./Timelines";
+import countries from "@/countriesData";
 
 const DraggableTimeline: React.FC = () => {
   const [dragging, setDragging] = useState(false);
@@ -11,6 +14,40 @@ const DraggableTimeline: React.FC = () => {
 
   const itemHeight = 100; // Height of a timeline item (including gaps)
   const maxHeight = 600; // The maximum height of the timeline container
+
+  // Get selected country and city from Redux store
+  const { selectedCountry, selectedCity } = useSelector(
+    (state: RootState) => state.event
+  );
+
+  useEffect(() => {
+    // Reset the position to the top when the country changes
+    if (selectedCountry) {
+      setPosition(0); // Reset the scroller position when country changes
+      syncTimelineWithScroller(0); // Sync the timeline scroll to the top
+    }
+  }, [selectedCountry]); // Only trigger when the country changes
+
+  useEffect(() => {
+    // Scroll to the position of the selected city
+    if (selectedCountry && selectedCity && timelineRef.current) {
+      const countryData = countries.find(
+        (country) => country.name === selectedCountry
+      );
+
+      if (countryData) {
+        const cityIndex = countryData.cities.findIndex(
+          (city) => city.name === selectedCity
+        );
+
+        if (cityIndex >= 0) {
+          const newPosition = cityIndex * itemHeight; // Calculate position
+          setPosition(newPosition); // Update position state
+          syncTimelineWithScroller(newPosition); // Sync the timeline scroll
+        }
+      }
+    }
+  }, [selectedCity, selectedCountry]); // Trigger on city or country change
 
   // Synchronize the scroller with the timeline scroll
   const syncScrollerWithTimeline = () => {

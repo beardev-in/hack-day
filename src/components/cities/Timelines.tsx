@@ -2,7 +2,7 @@
 
 import { RootState } from "@/app/redux/store";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";  // Import useDispatch
+import { useSelector, useDispatch } from "react-redux"; // Import useDispatch
 import { setSelectedCity } from "@/app/redux/features/EventSlice"; // Import the action
 import countries from "@/countriesData";
 import Link from "next/link";
@@ -13,8 +13,8 @@ interface TimelinesProps {
 
 const Timelines: React.FC<TimelinesProps> = ({ position }) => {
   const dispatch = useDispatch(); // Initialize dispatch
-  // Get the selected country from the Redux store
-  const { selectedCountry } = useSelector((state: RootState) => state.event);
+  // Get the selected country and city from the Redux store
+  const { selectedCountry, selectedCity } = useSelector((state: RootState) => state.event);
 
   // Get the cities data for the selected country
   const countryData = selectedCountry
@@ -28,16 +28,17 @@ const Timelines: React.FC<TimelinesProps> = ({ position }) => {
 
   const itemHeight = 100; // Height of each timeline item (including gaps)
 
-  // Highlight the timeline item only when the scroller aligns perfectly
-  const highlightTimeline = (index: number) => {
+  // Highlight the timeline item only when the scroller aligns perfectly or it's the selected city
+  const highlightTimeline = (index: number, cityName: string) => {
     const itemTop = index * itemHeight;
-    return Math.abs(position - itemTop) < itemHeight / 2; // Highlight if within half an item's height
+    return (
+      selectedCity === cityName || Math.abs(position - itemTop) < itemHeight / 2
+    );
   };
 
   // Function to handle city card click and dispatch the selected city to the store
   const handleCityClick = (cityName: string) => {
     dispatch(setSelectedCity(cityName)); // Dispatch the selected city name
-    
   };
 
   return (
@@ -46,7 +47,7 @@ const Timelines: React.FC<TimelinesProps> = ({ position }) => {
         <div
           key={index}
           className={`w-[332px] sm:w-[350px] lg:w-[380px] h-[86px] my-2 p-4 rounded-md ${
-            highlightTimeline(index)
+            highlightTimeline(index, city.name)
               ? "bg-custom-gradient border border-gray-800"
               : ""
           }`}
@@ -56,7 +57,7 @@ const Timelines: React.FC<TimelinesProps> = ({ position }) => {
             {/* City Name */}
             <h2
               className={`${
-                highlightTimeline(index)
+                highlightTimeline(index, city.name)
                   ? "opacity-100 text-xl text-[18px]"
                   : "opacity-50 text-[11px]"
               }`}
@@ -64,30 +65,29 @@ const Timelines: React.FC<TimelinesProps> = ({ position }) => {
               {city.name}
             </h2>
             {/* Icon for highlighting the event */}
-            {highlightTimeline(index) ? (
+            {highlightTimeline(index, city.name) ? (
               <Link
-              key={index}
-              href={`/hackathon/${city.name.toLowerCase()}`} // Dynamically generate the URL
-              onClick={() => handleCityClick(city.name)} // Dispatch action on click
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#FFFFFF"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-square-arrow-out-up-right"
-                >
-                  <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
-                  <path d="m21 3-9 9" />
-                  <path d="M15 3h6v6" />
-                </svg>
-              </span>
+                href={`/hackathon/${city.name.toLowerCase()}`} // Dynamically generate the URL
+                onClick={() => handleCityClick(city.name)} // Dispatch action on click
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-square-arrow-out-up-right"
+                  >
+                    <path d="M21 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h6" />
+                    <path d="m21 3-9 9" />
+                    <path d="M15 3h6v6" />
+                  </svg>
+                </span>
               </Link>
             ) : (
               <span>
@@ -115,7 +115,7 @@ const Timelines: React.FC<TimelinesProps> = ({ position }) => {
           <div className="flex flex-col items-start gap-">
             <p
               className={`${
-                highlightTimeline(index)
+                highlightTimeline(index, city.name)
                   ? "opacity-100 text-[18px] text-[#969696]"
                   : "opacity-50 text-[10px]"
               }`}
