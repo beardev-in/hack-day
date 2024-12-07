@@ -107,11 +107,11 @@ const Registerpage: React.FC = () => {
   };
 
   return (
-    <div className="bg-corner-glow" style={{ height: "calc(100vh)" }}>
+    <div className="bg-corner-glow min-h-screen">
       <Navbar />
-      <div className="w-full flex flex-col items-center justify-center font-mono">
-        <div className="w-[613px] bg-custom-gradient p-5 rounded-xl mt-20 border border-gray-600 flex flex-col gap-2">
-          <div className="text-[26px] mb-6">
+      <div className="w-full flex flex-col items-center justify-center font-mono p-4">
+        <div className="w-full md:w-[613px] bg-custom-gradient h-full p-5 rounded-xl mt-20 border border-gray-600 flex flex-col gap-2">
+          <div className="text-[20px] md:text-[26px] mb-6">
             <p>Welcome to Hack $Day</p>
             <p>
               Let’s begin the <span className="text-[#06C270]">Hacking</span>
@@ -123,7 +123,7 @@ const Registerpage: React.FC = () => {
               <label htmlFor="fullname" className="text-[#06C270]">
                 Enter your FullName
               </label>
-              <div className="flex gap-2 relative mb-2">
+              <div className="flex flex-col md:flex-row gap-2 relative mb-2">
                 <input
                   {...register("fullName")}
                   placeholder="John Doe"
@@ -134,7 +134,7 @@ const Registerpage: React.FC = () => {
                     if (e.key === "Enter") nextStep();
                   }}
                 />
-                <button onClick={() => nextStep()} className="border w-[107px] rounded-xl">
+                <button onClick={() => nextStep()} className="border md:w-[107px] rounded-xl p-1 md:p-0">
                   continue
                 </button>
               </div>
@@ -149,7 +149,7 @@ const Registerpage: React.FC = () => {
               <label htmlFor="email" className="text-[#06C270]">
                 Enter your email
               </label>
-              <div className="flex gap-2 relative mb-2">
+              <div className="flex flex-col md:flex-row gap-2 relative mb-2">
                 <input
                   {...register("email")}
                   placeholder="John@gmail.com"
@@ -162,7 +162,7 @@ const Registerpage: React.FC = () => {
                 />
                 <button
                   onClick={() => nextStep()}
-                  className="border w-[107px] rounded-xl"
+                  className="border w-full md:w-[107px] rounded-xl p-1 md:p-0"
                 >
                   continue
                 </button>
@@ -178,7 +178,7 @@ const Registerpage: React.FC = () => {
               <label htmlFor="emailOtp" className="text-[#06C270]">
                 Enter the OTP sent to your email
               </label>
-              <div className="flex gap-2 relative mb-2">
+              <div className="flex flex-col md:flex-row gap-2 relative mb-2">
                 <input
                   {...register("emailOtp")}
                   placeholder="Enter OTP"
@@ -192,7 +192,7 @@ const Registerpage: React.FC = () => {
                 />
                 <button
                   onClick={() => nextStep()}
-                  className="border w-[107px] rounded-xl"
+                  className="border w-full md:w-[107px] rounded-xl p-1 md:p-0"
                 >
                   verify
                 </button>

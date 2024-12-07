@@ -19,7 +19,7 @@
 
 @media (max-width: 768px) {
   .gap_section {
-    margin: 0 10px 0 10px; /* Adjust the margin for smaller screens */
+    margin: 0 5px 0 5px; /* Adjust the margin for smaller screens */
   }
 }
 

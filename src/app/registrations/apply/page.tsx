@@ -38,8 +38,7 @@ type FormData = z.infer<typeof FormSchema>;
 const ApplyPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { teamName, teamCount, participationType } = useSelector((state: RootState) => state.apply);  // Access Redux store
-  const { fullName, email, emailOtp } = useSelector((state: RootState) => state.registration);  // Access Redux store
+  const { teamName, teamCount, participationType} = useSelector((state: RootState) => state.apply); 
 
   const {
     register,
@@ -109,11 +108,11 @@ const ApplyPage: React.FC = () => {
   }, [getValues("teamCount"), dispatch]);
 
   return (
-    <div className="bg-corner-glow" style={{ height: "calc(100vh)" }}>
+    <div className="bg-corner-glow min-h-screen">
       <Navbar />
-      <div className="w-full flex flex-col items-center justify-center font-mono">
-        <div className="w-[613px] bg-custom-gradient p-5 rounded-xl mt-20 border border-gray-600 flex flex-col gap-2">
-          <div className="text-[26px] mb-6">
+      <div className="w-full flex flex-col items-center justify-center font-mono p-4">
+        <div className="w-full sm:w-[613px] bg-custom-gradient p-5 rounded-xl mt-20 border border-gray-600 flex flex-col gap-2">
+          <div className="text-[24] md:text-[26px] mb-6">
             <p>
               Hack $DAY <span className="text-[#06C270]">@Pondy</span> - Application
             </p>
@@ -163,7 +162,7 @@ const ApplyPage: React.FC = () => {
               <label htmlFor="teamName" className="text-[#06C270]">
                 Team Name
               </label>
-              <div className="flex gap-2 relative mb-2">
+              <div className="flex flex-col md:flex-row gap-2 relative mb-2">
                 <input
                   {...register("teamName")}
                   id="teamName"
@@ -177,7 +176,7 @@ const ApplyPage: React.FC = () => {
                 />
                 <button
                   onClick={nextStep}
-                  className="border w-[107px] rounded-xl text-white hover:bg-[#04A65C] transition-all"
+                  className="border w-full md:w-[107px] rounded-xl text-white hover:bg-[#04A65C] transition-all p-1 md:p-0"
                 >
                   Continue
                 </button>
@@ -194,7 +193,7 @@ const ApplyPage: React.FC = () => {
               <label htmlFor="teamCount" className="text-[#06C270]">
                 How many members are there in your team?
               </label>
-              <div className="flex gap-2 relative mb-2">
+              <div className="flex flex-col md:flex-row gap-2 relative mb-2">
                 <input
                   {...register("teamCount")}
                   id="teamCount"
@@ -208,7 +207,7 @@ const ApplyPage: React.FC = () => {
                 />
                 <button
                   onClick={nextStep}
-                  className="border w-[107px] rounded-xl text-white hover:bg-[#04A65C] transition-all"
+                  className="border w-full md:w-[107px] rounded-xl text-white hover:bg-[#04A65C] transition-all p-1 md:p-0"
                 >
                   Continue
                 </button>

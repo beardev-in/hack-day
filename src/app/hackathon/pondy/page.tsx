@@ -76,8 +76,8 @@ const Pondy = () => {
           <div className="bg-custom-gradient p-5 rounded-xl border border-gray-600 md:w-[65%]">
             <h1 className="text-[28px] font-semibold">Hackathon Overview</h1>
             <p className="font-semibold mt-2">Tracks</p>
-            <div className="grid grid-cols-3 gap-4 mt-2">
-              <button className="px-1 py-1 bg-custom-gradient border border-gray-600 rounded-xl">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-2">
+              <button className="px-1 py-4 bg-custom-gradient border border-gray-600 rounded-xl">
                 AI/ML
               </button>
               <button className="px-2 py-4 bg-custom-gradient border border-gray-600 rounded-xl">

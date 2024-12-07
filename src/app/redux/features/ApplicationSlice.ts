@@ -4,12 +4,16 @@ interface ApplicationState {
   teamName: string;
   teamCount: number | undefined;
   participationType: "team" | "solo" | undefined;
+  teamEmails: string[]; // This will store the team member emails
+  currentStep: number; // Track the current step of the form
 }
 
 const initialState: ApplicationState = {
   teamName: "",
   teamCount: undefined,
   participationType: undefined,
+  teamEmails: [], // Initialize with an empty array
+  currentStep: 0, // Start at step 0
 };
 
 const applicationSlice = createSlice({
@@ -30,8 +34,14 @@ const applicationSlice = createSlice({
       state.teamCount = undefined;
       state.participationType = undefined;
     },
+    setTeamEmails: (state, action: PayloadAction<string[]>) => {
+      state.teamEmails = action.payload;
+    },
+    setCurrentStep: (state, action: PayloadAction<number>) => {
+      state.currentStep = action.payload;
+    },
   },
 });
 
-export const { setTeamName, setTeamCount, setParticipationType, resetForm } = applicationSlice.actions;
+export const { setTeamName, setTeamCount, setParticipationType, resetForm, setTeamEmails, setCurrentStep } = applicationSlice.actions;
 export default applicationSlice.reducer;
