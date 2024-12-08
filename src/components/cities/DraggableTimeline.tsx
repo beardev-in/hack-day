@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { useSelector } from "react-redux"; // Import useSelector
+import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
 import Timelines from "./Timelines";
 import countries from "@/countriesData";
@@ -50,7 +50,7 @@ const DraggableTimeline: React.FC = () => {
   }, [selectedCity, selectedCountry]); // Trigger on city or country change
 
   // Synchronize the scroller with the timeline scroll
-  const syncScrollerWithTimeline = () => {
+  const syncScrollerWithTimeline = useCallback(() => {
     if (timelineRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = timelineRef.current;
       const scrollPercentage = scrollTop / (scrollHeight - clientHeight);
@@ -59,47 +59,54 @@ const DraggableTimeline: React.FC = () => {
       const newPosition = scrollPercentage * (maxHeight - draggerHeight);
       setPosition(Math.round(newPosition / itemHeight) * itemHeight); // Snap to nearest item
     }
-  };
+  }, [itemHeight, maxHeight]);
 
   // Synchronize the timeline with the scroller drag
-  const syncTimelineWithScroller = (newPosition: number) => {
-    if (timelineRef.current) {
-      const { scrollHeight, clientHeight } = timelineRef.current;
-      const scrollPercentage = newPosition / (maxHeight - (draggerRef.current?.offsetHeight || 0));
-      timelineRef.current.scrollTo({
-        top: scrollPercentage * (scrollHeight - clientHeight),
-        behavior: "auto",
-      });
-    }
-  };
+  const syncTimelineWithScroller = useCallback(
+    (newPosition: number) => {
+      if (timelineRef.current) {
+        const { scrollHeight, clientHeight } = timelineRef.current;
+        const scrollPercentage =
+          newPosition / (maxHeight - (draggerRef.current?.offsetHeight || 0));
+        timelineRef.current.scrollTo({
+          top: scrollPercentage * (scrollHeight - clientHeight),
+          behavior: "auto",
+        });
+      }
+    },
+    [maxHeight]
+  );
 
   // Handle drag start
-  const handleDragStart = () => setDragging(true);
+  const handleDragStart = useCallback(() => setDragging(true), []);
 
   // Handle drag end
-  const handleDragEnd = () => {
+  const handleDragEnd = useCallback(() => {
     setDragging(false);
     // Snap to nearest timeline item
     const snappedPosition = Math.round(position / itemHeight) * itemHeight;
     setPosition(snappedPosition);
     syncTimelineWithScroller(snappedPosition);
-  };
+  }, [position, itemHeight, syncTimelineWithScroller]);
 
   // Handle drag move
-  const handleDragMove = (e: MouseEvent) => {
-    if (dragging && timelineRef.current) {
-      const timeline = timelineRef.current;
-      const lineHeight = timeline.offsetHeight;
-      const draggerHeight = draggerRef.current?.offsetHeight || 0;
-      const newPos = Math.min(
-        Math.max(0, e.clientY - timeline.getBoundingClientRect().top),
-        lineHeight - draggerHeight
-      );
+  const handleDragMove = useCallback(
+    (e: MouseEvent) => {
+      if (dragging && timelineRef.current) {
+        const timeline = timelineRef.current;
+        const lineHeight = timeline.offsetHeight;
+        const draggerHeight = draggerRef.current?.offsetHeight || 0;
+        const newPos = Math.min(
+          Math.max(0, e.clientY - timeline.getBoundingClientRect().top),
+          lineHeight - draggerHeight
+        );
 
-      setPosition(newPos);
-      syncTimelineWithScroller(newPos);
-    }
-  };
+        setPosition(newPos);
+        syncTimelineWithScroller(newPos);
+      }
+    },
+    [dragging, syncTimelineWithScroller]
+  );
 
   // Attach drag event listeners
   useEffect(() => {
@@ -115,7 +122,7 @@ const DraggableTimeline: React.FC = () => {
       document.removeEventListener("mousemove", handleDragMove);
       document.removeEventListener("mouseup", handleDragEnd);
     };
-  }, [dragging]);
+  }, [dragging, handleDragMove, handleDragEnd]);
 
   // Attach scroll synchronization
   useEffect(() => {
@@ -125,7 +132,7 @@ const DraggableTimeline: React.FC = () => {
     return () => {
       currentTimeline?.removeEventListener("scroll", syncScrollerWithTimeline);
     };
-  }, []);
+  }, [syncScrollerWithTimeline]);
 
   return (
     <div className="relative w-full sm:w-[379px] flex justify-between max-h-[600px]">

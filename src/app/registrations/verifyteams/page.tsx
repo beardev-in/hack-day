@@ -28,10 +28,8 @@ const VerifyTeamspage: React.FC = () => {
     (state: RootState) => state.apply
   );
 
-  // Check if teamCount is undefined
-  if (teamCount === undefined) {
-    return <div>Loading...</div>; // or any other fallback UI
-  }
+  // Provide a fallback value to prevent conditional rendering of hooks
+  const safeTeamCount = teamCount ?? 0;
 
   // Initialize the form
   const {
@@ -42,7 +40,7 @@ const VerifyTeamspage: React.FC = () => {
     mode: "onBlur",
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      teamEmails: Array(teamCount).fill(""), // Initialize with empty values
+      teamEmails: Array(safeTeamCount).fill(""), // Initialize with empty values
     },
   });
 
@@ -55,17 +53,22 @@ const VerifyTeamspage: React.FC = () => {
 
   // Next Step Handler
   const nextStep = () => {
-    if (currentStep < teamCount - 1) {
+    if (currentStep < safeTeamCount - 1) {
       dispatch(setCurrentStep(currentStep + 1)); // Update the step in Redux store
     }
   };
 
   useEffect(() => {
-    if (teamEmails.length < teamCount) {
+    if (teamEmails.length < safeTeamCount) {
       // Initialize teamEmails if it's not already set
-      dispatch(setTeamEmails(Array(teamCount).fill("")));
+      dispatch(setTeamEmails(Array(safeTeamCount).fill("")));
     }
-  }, [teamCount, teamEmails, dispatch]);
+  }, [safeTeamCount, teamEmails, dispatch]);
+
+  // Early return if teamCount is undefined
+  if (teamCount === undefined) {
+    return <div>Loading...</div>; // or any other fallback UI
+  }
 
   return (
     <div className="bg-corner-glow" style={{ height: "calc(100vh)" }}>
@@ -76,7 +79,7 @@ const VerifyTeamspage: React.FC = () => {
             <p>
               Team <span className="text-[#06C270]">Member Emails</span>
             </p>
-            {currentStep < teamCount - 1 && (
+            {currentStep < safeTeamCount - 1 && (
               <p className="text-[18px]">
                 Please provide email addresses for each team member.
               </p>
@@ -86,7 +89,7 @@ const VerifyTeamspage: React.FC = () => {
           {!teamEmails.every((email) => email.trim() !== "") ? (
             <form onSubmit={handleSubmit(onSubmit)} className="w-full flex gap-4">
               {/* Render one input field at a time based on the step */}
-              {currentStep < teamCount && (
+              {currentStep < safeTeamCount && (
                 <div key={currentStep} className="w-full flex flex-col gap-1">
                   <label
                     htmlFor={`teamEmails.${currentStep}`}

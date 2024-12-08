@@ -3,22 +3,27 @@
 import React, { useEffect, useState } from "react";
 
 export default function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [visible, setVisible] = useState(true);
+  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [visible, setVisible] = useState<boolean>(true);
 
-  // Update position on mouse move
   useEffect(() => {
-    const handleMouseMove = (event) => {
+    // Handle mouse move
+    const handleMouseMove = (event: MouseEvent): void => {
       setPosition({ x: event.clientX, y: event.clientY });
     };
 
-    const handleMouseEnter = () => setVisible(true);
-    const handleMouseLeave = () => setVisible(false);
+    // Handle mouse enter
+    const handleMouseEnter = (): void => setVisible(true);
 
+    // Handle mouse leave
+    const handleMouseLeave = (): void => setVisible(false);
+
+    // Attach event listeners
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseenter", handleMouseEnter);
     document.addEventListener("mouseleave", handleMouseLeave);
 
+    // Cleanup event listeners
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseenter", handleMouseEnter);

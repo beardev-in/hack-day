@@ -37,7 +37,7 @@ type FormData = z.infer<typeof FormSchema>;
 const ApplyPage: React.FC = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { teamName, teamCount, participationType} = useSelector((state: RootState) => state.apply); 
+  const { teamName, teamCount, participationType } = useSelector((state: RootState) => state.apply);
 
   const {
     register,
@@ -51,8 +51,8 @@ const ApplyPage: React.FC = () => {
     mode: "onChange",
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      teamName,  // Set default values from the Redux store
-      teamCount: teamCount?.toString() || "",  // Convert to string for form input
+      teamName,
+      teamCount: teamCount?.toString() || "",
       participationType,
     },
   });
@@ -70,9 +70,8 @@ const ApplyPage: React.FC = () => {
       setCompletedSteps((prev) => [...prev, step]);
 
       if (step === 2 && participationType === "team") {
-        // Navigate to the VerifyTeamsPage with teamCount as query
-        const teamCount = parseInt(getValues("teamCount") || "0", 10);
-        router.push(`/registrations/verifyteams?teamCount=${teamCount}`);
+        const teamCountValue = parseInt(getValues("teamCount") || "0", 10);
+        router.push(`/registrations/verifyteams?teamCount=${teamCountValue}`);
       } else {
         setStep((prev) => prev + 1);
       }
@@ -87,6 +86,10 @@ const ApplyPage: React.FC = () => {
   // Watch field values
   const { participationType: watchedParticipationType } = watch();
 
+  // Extracted variables for dependencies
+  const teamNameValue = getValues("teamName");
+  const teamCountValue = getValues("teamCount");
+
   // Dispatch actions when form fields change
   useEffect(() => {
     if (watchedParticipationType) {
@@ -95,16 +98,16 @@ const ApplyPage: React.FC = () => {
   }, [watchedParticipationType, dispatch]);
 
   useEffect(() => {
-    if (getValues("teamName")) {
-      dispatch(setTeamName(getValues("teamName")));
+    if (teamNameValue) {
+      dispatch(setTeamName(teamNameValue));
     }
-  }, [getValues("teamName"), dispatch]);
+  }, [teamNameValue, dispatch]);
 
   useEffect(() => {
-    if (getValues("teamCount")) {
-      dispatch(setTeamCount(parseInt(getValues("teamCount"), 10)));
+    if (teamCountValue) {
+      dispatch(setTeamCount(parseInt(teamCountValue, 10)));
     }
-  }, [getValues("teamCount"), dispatch]);
+  }, [teamCountValue, dispatch]);
 
   return (
     <div className="bg-corner-glow min-h-screen">
